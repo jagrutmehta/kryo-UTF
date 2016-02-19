@@ -6,7 +6,9 @@ You are free to copy this code and use it whatever way you want. I have reasonab
 
 For your reference: Below exception will be handled by this serializer. 
 
+```java
 java.lang.IllegalAccessError: tried to access class sun.nio.cs.UTF_8 from class sun.nio.cs.UTF_8ConstructorAccess
     at sun.nio.cs.UTF_8ConstructorAccess.newInstance(Unknown Source)
     at com.esotericsoftware.kryo.Kryo$DefaultInstantiatorStrategy$1.newInstance(Kryo.java:1234)
     at com.esotericsoftware.kryo.Kryo.newInstance(Kryo.java:1086)
+```
