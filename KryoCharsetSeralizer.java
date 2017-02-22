@@ -33,33 +33,10 @@ public class KryoCharsetSeralizer {
 			}
 
 		};
-		// Register those Charset classes which are not public.
-		registerCharsets(kryo, "UTF-8", charsetCustomListSerializer);
-		registerCharsets(kryo, "UTF-16", charsetCustomListSerializer);
-		registerCharsets(kryo, "UTF-16BE", charsetCustomListSerializer);
-		registerCharsets(kryo, "UTF-16LE", charsetCustomListSerializer);
-		registerCharsets(kryo, "ISO_8859_1", charsetCustomListSerializer);
-		registerCharsets(kryo,"US_ASCII",charsetCustomListSerializer);
+		Charset.availableCharsets().values().
+			forEach(cs -> kryo.register(cs.getClass(), charsetCustomListSerializer));
 
 
-	}
-
-	/**
-	 * Safe method to register CharSets. It ignores any exception and moves on.
-	 * 
-	 * @param kryo
-	 * @param name
-	 * @param s
-	 * @return
-	 */
-	private static boolean registerCharsets(Kryo kryo, String name, Serializer s) {
-		try {
-			kryo.register(Charset.forName(name).getClass(), s);
-			return true;
-		} catch (Throwable e) {
-			System.err.println("[WARN] Unable to register charset " + name + " with Kryo. Exception is " + e.getMessage());
-			return false;
-		}
 	}
 	
 	public static void main(String...argv){
